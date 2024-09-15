@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phish or Genuine Quiz</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .question {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .game-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin: 10px;
+            width: 300px;
+        }
+
+        .game-button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            display: none;
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Phish or Genuine Quiz</h2>
+
+    <div id="quiz-container">
+        <div class="question" id="question-1">
+            <p>1. "You've won a free vacation! Click here to claim your prize: <br><strong>http://free-vacation-win123.click.claim-now.verify.info/win?token=12345abc</strong>"</p>
+            <button class="game-button" onclick="checkAnswer(1, 'Phish')">Phish</button>
+            <button class="game-button" onclick="checkAnswer(1, 'Genuine')">Genuine</button>
+        </div>
+
+        <div class="question" id="question-2" style="display: none;">
+            <p>2. "Your bank account has been compromised. Please login here to secure it: <br><strong>http://security-bank-login.secure-account-check.com/update-now</strong>"</p>
+            <button class="game-button" onclick="checkAnswer(2, 'Phish')">Phish</button>
+            <button class="game-button" onclick="checkAnswer(2, 'Genuine')">Genuine</button>
+        </div>
+
+        <div class="question" id="question-3" style="display: none;">
+            <p>3. "Your recent Amazon purchase has been shipped. Track it here: <br><strong>https://www.amazon.com/tracking/parcel/123456789</strong>"</p>
+            <button class="game-button" onclick="checkAnswer(3, 'Phish')">Phish</button>
+            <button class="game-button" onclick="checkAnswer(3, 'Genuine')">Genuine</button>
+        </div>
+
+        <div class="question" id="question-4" style="display: none;">
+            <p>4. "Please update your password for security reasons: click this link: <br><strong>http://update-password-security-verification123.com/reset-password</strong>"</p>
+            <button class="game-button" onclick="checkAnswer(4, 'Phish')">Phish</button>
+            <button class="game-button" onclick="checkAnswer(4, 'Genuine')">Genuine</button>
+        </div>
+
+        <div class="question" id="question-5" style="display: none;">
+            <p>5. "You have an upcoming delivery, track your parcel here: <br><strong>https://shipping-company.com/track/parcel-1234567890</strong>"</p>
+            <button class="game-button" onclick="checkAnswer(5, 'Phish')">Phish</button>
+            <button class="game-button" onclick="checkAnswer(5, 'Genuine')">Genuine</button>
+        </div>
+
+        <div id="result">
+            <p>Your Score: <span id="score"></span>/5</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'Phish',   
+            2: 'Phish',   
+            3: 'Genuine', 
+            4: 'Phish',   
+            5: 'Genuine'  
+        };
+
+        let currentQuestion = 1;
+        let score = 0;  
+
+        function checkAnswer(questionNumber, answer) {
+            if (correctAnswers[questionNumber] === answer) {
+                document.body.style.backgroundColor = 'green';  
+                score++;  
+            } else {
+                document.body.style.backgroundColor = 'red';    
+            }
+
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#ffffff';  
+                document.getElementById(`question-${questionNumber}`).style.display = 'none';  
+
+                currentQuestion++;
+                if (currentQuestion <= 5) {
+                    document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+                } else {
+                    document.getElementById('result').style.display = 'block';
+                    document.getElementById('score').innerText = score;  
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

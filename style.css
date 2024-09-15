@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    text-align: center;
+    color: #333;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transform: rotate(0deg);
+    transition: transform 4s ease-out;
+}
+
+.pointer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid red;
+    z-index: 100;
+}
+
+.segment {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform-origin: 100% 100%;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.segment:nth-child(1) {
+    background-color: #f39c12;
+    transform: rotate(0deg);
+}
+
+.segment:nth-child(2) {
+    background-color: #e74c3c;
+    transform: rotate(90deg);
+}
+
+.segment:nth-child(3) {
+    background-color: #27ae60;
+    transform: rotate(180deg);
+}
+
+.segment:nth-child(4) {
+    background-color: #3498db;
+    transform: rotate(270deg);
+}
+
+.segment span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#spin-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#spin-btn:hover {
+    background-color: #2980b9;
+}
+
+#test-content {
+    margin-top: 30px;
+}

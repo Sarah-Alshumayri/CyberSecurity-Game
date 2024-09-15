@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Awareness Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .question {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .game-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 10px;
+            width: 200px;
+        }
+
+        .game-button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            display: none;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Security Awareness Quiz</h2>
+
+    <div id="quiz-container">
+        <div class="question" id="question-1">
+            <p>1. What should you do if you receive an unexpected email with a link?</p>
+            <button class="game-button" onclick="checkAnswer(1, 'Report it to IT')">Report it to IT</button>
+            <button class="game-button" onclick="checkAnswer(1, 'Click the link')">Click the link</button>
+            <button class="game-button" onclick="checkAnswer(1, 'Ignore it')">Ignore it</button>
+        </div>
+
+        <div class="question" id="question-2" style="display: none;">
+            <p>2. How often should you update your password?</p>
+            <button class="game-button" onclick="checkAnswer(2, 'Every 6 months')">Every 6 months</button>
+            <button class="game-button" onclick="checkAnswer(2, 'Only when compromised')">Only when compromised</button>
+            <button class="game-button" onclick="checkAnswer(2, 'Every year')">Every year</button>
+        </div>
+
+        <div class="question" id="question-3" style="display: none;">
+            <p>3. What's the safest way to store your passwords?</p>
+            <button class="game-button" onclick="checkAnswer(3, 'In a password manager')">In a password manager</button>
+            <button class="game-button" onclick="checkAnswer(3, 'On a sticky note')">On a sticky note</button>
+            <button class="game-button" onclick="checkAnswer(3, 'In a text file on your PC')">In a text file on your PC</button>
+        </div>
+
+        <div class="question" id="question-4" style="display: none;">
+            <p>4. How should you connect to a public Wi-Fi?</p>
+            <button class="game-button" onclick="checkAnswer(4, 'Use a VPN')">Use a VPN</button>
+            <button class="game-button" onclick="checkAnswer(4, 'Connect directly')">Connect directly</button>
+            <button class="game-button" onclick="checkAnswer(4, 'Disable firewall and connect')">Disable firewall and connect</button>
+        </div>
+
+        <div class="question" id="question-5" style="display: none;">
+            <p>5. What should you do if your antivirus software warns of malware?</p>
+            <button class="game-button" onclick="checkAnswer(5, 'Ignore the warning')">Ignore the warning</button>
+            <button class="game-button" onclick="checkAnswer(5, 'Run a full system scan')">Run a full system scan</button>
+            <button class="game-button" onclick="checkAnswer(5, 'Uninstall the antivirus')">Uninstall the antivirus</button>
+        </div>
+
+        <!-- Result Page (Initially Hidden) -->
+        <div id="result">
+            <p>Your Score: <span id="score"></span>/5</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'Report it to IT',    // Correct answer for question 1
+            2: 'Every 6 months',     // Correct answer for question 2
+            3: 'In a password manager',  // Correct answer for question 3
+            4: 'Use a VPN',          // Correct answer for question 4
+            5: 'Run a full system scan' // Correct answer for question 5
+        };
+
+        let currentQuestion = 1;
+        let score = 0;  // Variable to track the number of correct answers
+
+        function checkAnswer(questionNumber, answer) {
+            if (correctAnswers[questionNumber] === answer) {
+                document.body.style.backgroundColor = 'green';  // Correct answer
+                score++;  // Increment score for correct answer
+            } else {
+                document.body.style.backgroundColor = 'red';    // Wrong answer
+            }
+
+            // Show the next question or result after 1 second
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#ffffff';  // Reset background color
+                document.getElementById(`question-${questionNumber}`).style.display = 'none';  // Hide current question
+
+                // If there's a next question, display it
+                currentQuestion++;
+                if (currentQuestion <= 5) {
+                    document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+                } else {
+                    // If all questions are answered, show the result
+                    document.getElementById('result').style.display = 'block';
+                    document.getElementById('score').innerText = score;  // Display the score
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

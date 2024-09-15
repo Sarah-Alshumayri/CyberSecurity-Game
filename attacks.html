@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attacks Type Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .question {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .game-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 10px;
+            width: 200px;
+        }
+
+        .game-button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            display: none;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Attacks Type Quiz</h2>
+
+    <div id="quiz-container">
+        <div class="question" id="question-1">
+            <p>1. An attacker tricks you into revealing sensitive information. What is this?</p>
+            <button class="game-button" onclick="checkAnswer(1, 'Phishing')">Phishing</button>
+            <button class="game-button" onclick="checkAnswer(1, 'Malware')">Malware</button>
+            <button class="game-button" onclick="checkAnswer(1, 'DDoS')">DDoS</button>
+        </div>
+
+        <div class="question" id="question-2" style="display: none;">
+            <p>2. Flooding a network with traffic to make it unavailable is called?</p>
+            <button class="game-button" onclick="checkAnswer(2, 'Phishing')">Phishing</button>
+            <button class="game-button" onclick="checkAnswer(2, 'DDoS')">DDoS</button>
+            <button class="game-button" onclick="checkAnswer(2, 'MITM')">MITM</button>
+        </div>
+
+        <div class="question" id="question-3" style="display: none;">
+            <p>3. Malicious software that takes control of your device is called?</p>
+            <button class="game-button" onclick="checkAnswer(3, 'Phishing')">Phishing</button>
+            <button class="game-button" onclick="checkAnswer(3, 'Malware')">Rootkits Malware</button>
+            <button class="game-button" onclick="checkAnswer(3, 'Social Engineering')">Social Engineering</button>
+        </div>
+
+        <div class="question" id="question-4" style="display: none;">
+            <p>4. An attacker pretends to be a trusted person to gather confidential info. This is?</p>
+            <button class="game-button" onclick="checkAnswer(4, 'Social Engineering')">Social Engineering</button>
+            <button class="game-button" onclick="checkAnswer(4, 'Phishing')">Phishing</button>
+            <button class="game-button" onclick="checkAnswer(4, 'MITM')">MITM</button>
+        </div>
+
+        <div class="question" id="question-5" style="display: none;">
+            <p>5. Which attack involves intercepting and altering communication between two parties?</p>
+            <button class="game-button" onclick="checkAnswer(5, 'MITM')">MITM</button>
+            <button class="game-button" onclick="checkAnswer(5, 'Malware')">Malware</button>
+            <button class="game-button" onclick="checkAnswer(5, 'DDoS')">DDoS</button>
+        </div>
+
+        <!-- Result Page (Initially Hidden) -->
+        <div id="result">
+            <p>Your Score: <span id="score"></span>/5</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'Phishing',  // Correct answer for question 1
+            2: 'DDoS',      // Correct answer for question 2
+            3: 'Malware',    // Correct answer for question 3
+            4: 'Social Engineering', // Correct answer for question 4
+            5: 'MITM'        // Correct answer for question 5
+        };
+
+        let currentQuestion = 1;
+        let score = 0;  // Variable to track the number of correct answers
+
+        function checkAnswer(questionNumber, answer) {
+            if (correctAnswers[questionNumber] === answer) {
+                document.body.style.backgroundColor = 'green';  // Correct answer
+                score++;  // Increment score for correct answer
+            } else {
+                document.body.style.backgroundColor = 'red';    // Wrong answer
+            }
+
+            // Show the next question or result after 1 second
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#ffffff';  // Reset background color
+                document.getElementById(`question-${questionNumber}`).style.display = 'none';  // Hide current question
+
+                // If there's a next question, display it
+                currentQuestion++;
+                if (currentQuestion <= 5) {
+                    document.getElementById(`question-${currentQuestion}`).style.display = 'block';
+                } else {
+                    // If all questions are answered, show the result
+                    document.getElementById('result').style.display = 'block';
+                    document.getElementById('score').innerText = score;  // Display the score
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
